@@ -36,11 +36,13 @@ const NewTrain = () => {
 
     const gym = event.target.gym.value
     const num = event.target.num.value
+    const lap = event.target.lap.value
     const weight = event.target.weight.value
 
     setList(pre => [...pre, {
       gym: gym,
       number: num,
+      lap: lap,
       weight: weight
     }])
 
@@ -62,24 +64,28 @@ const NewTrain = () => {
 
         <p>
           <input type="text" name="num" placeholder="Количество повторений:"></input>
+        </p>        
+        
+        <p>
+          <input type="number" name="lap" placeholder="Количество кругов:"></input>
         </p>
 
         <p>
           <input type="text" name="weight" placeholder="Дополнительный вес:"></input>
         </p>
-        <button type="submit">добавить в тренировку</button>
+        <button type="submit">+</button>
       </form>
     </div>
 
     <div className="train_list">
       <h2>{day}.{month}.{year}: тренировка {placeTrain.find(el => el.id === 1)?.place}</h2>
-      <p>Упражнение / Количество / Доп. вес</p>
     
         <table>
           <thead>
             <th>№</th>
             <th>Упражнение</th>
-            <th>Кол повторений</th>
+            <th>Кол</th>
+            <th>Круг</th>
             <th>Доп вес</th>
           </thead>
           <tbody>
@@ -89,6 +95,7 @@ const NewTrain = () => {
                   <td>{index + 1}</td>
                   <td>{el.gym}</td>
                   <td>{el.number}</td>
+                  <td>{el.lap}</td>
                   <td>{el.weight}</td>
                 </tr>
               )})
@@ -98,7 +105,7 @@ const NewTrain = () => {
 
 
 
-      <button onClick={setTrain}>Сохранить тренировку</button>
+      <button onClick={setTrain}>Сохранить</button>
     </div>
   </div>
 }

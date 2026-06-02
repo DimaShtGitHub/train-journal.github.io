@@ -110,10 +110,23 @@ code {
   background: var(--code-bg);
 } */
 
+html {
+  height: 100%;
+}
+
+h1 {
+  text-shadow: 2px 2px white, 2px 2px white;
+}
 
 .pixelify-sans {
   font-family: "Pixelify Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
+
+
+  background-image: url('./assets/img/shtanga_bliny_tiazheloatleta_115326_1920x1080.jpg');
+  background-repeat: no-repeat; /* не повторять изображение */
+  background-size: cover; /* растянуть на весь экран */
+  background-position: center center; /* центрировать изображение */
 }

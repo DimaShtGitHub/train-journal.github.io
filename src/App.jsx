@@ -6,8 +6,8 @@ const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (<>
-    <h1>Train Journal</h1>
-    <button onClick={() => setModalOpen(true)}>Add Train</button> 
+    <h1>Журнал для тренировок</h1>
+    <button onClick={() => setModalOpen(true)}>Добавить тренировку</button> 
     <button>Посмотреть все тренировки</button>
 
     <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}> 
