@@ -57,22 +57,15 @@ const NewTrain = () => {
     <div className="train_panel">
       <form onSubmit={handleSubmit}>
         <p>
-          {/* <label form="gym">Упражнение:</label> */}
           <input type="text" name="gym" placeholder="Упражнение:"></input>
         </p>
 
         <p>
-          {/* <label form="num">Количество повторений:</label> */}
           <input type="text" name="num" placeholder="Количество повторений:"></input>
         </p>
 
         <p>
-          {/* <label form="weight">Дополнительный вес:</label> */}
-          <input 
-            type="text" 
-            name="weight"
-            placeholder="Дополнительный вес:"
-            ></input>
+          <input type="text" name="weight" placeholder="Дополнительный вес:"></input>
         </p>
         <button type="submit">добавить в тренировку</button>
       </form>
@@ -84,7 +77,7 @@ const NewTrain = () => {
       {list.map((el, index) => {
         return (
           <div>
-            <p>{index + 1}. {el.gym} / {el.number} / {el.weight}`</p>
+            <p>{index + 1}. {el.gym} / {el.number} / {el.weight} кг</p>
           </div>
         )
       })}
