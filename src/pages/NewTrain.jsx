@@ -6,12 +6,12 @@ const NewTrain = () => {
   const [date, setDate] = useState('')
   const [list, setList] = useState([])
   
-  useEffect(() => {
-    const today = new Date();
+  const today = new Date();
 
-    const day = today.getDate();
-    const month = today.getMonth() + 1; // Месяцы начинаются с 0
-    const year = today.getFullYear();
+  const day = today.getDate();
+  const month = today.getMonth() + 1; // Месяцы начинаются с 0
+  const year = today.getFullYear();
+  useEffect(() => {
 
     setDate(`${day}.${month}.${year}`)
   }, [])
@@ -72,15 +72,31 @@ const NewTrain = () => {
     </div>
 
     <div className="train_list">
-      <h2>{date}: тренировка {placeTrain.find(el => el.id === 1)?.place}</h2>
-      
-      {list.map((el, index) => {
-        return (
-          <div>
-            <p>{index + 1}. {el.gym} / {el.number} / {el.weight} кг</p>
-          </div>
-        )
-      })}
+      <h2>{day}.{month}.{year}: тренировка {placeTrain.find(el => el.id === 1)?.place}</h2>
+      <p>Упражнение / Количество / Доп. вес</p>
+    
+        <table>
+          <thead>
+            <th>№</th>
+            <th>Упражнение</th>
+            <th>Кол повторений</th>
+            <th>Доп вес</th>
+          </thead>
+          <tbody>
+            {list.map((el, index) => {
+              return (
+                <tr>
+                  <td>{index + 1}</td>
+                  <td>{el.gym}</td>
+                  <td>{el.number}</td>
+                  <td>{el.weight}</td>
+                </tr>
+              )})
+            }
+      </tbody> 
+      </table>
+
+
 
       <button onClick={setTrain}>Сохранить тренировку</button>
     </div>

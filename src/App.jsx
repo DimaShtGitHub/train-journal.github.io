@@ -7,13 +7,13 @@ const App = () => {
 
   return (<>
     <h1>Train Journal</h1>
-    <button onClick={() => setModalOpen(true)}>Открыть</button> 
+    <button onClick={() => setModalOpen(true)}>Add Train</button> 
+    <button>Посмотреть все тренировки</button>
 
     <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}> 
       <NewTrain />
     </Modal>
-    <button>add training</button>
-    <button>see tranings</button>
+    
   </>)
 }
 
