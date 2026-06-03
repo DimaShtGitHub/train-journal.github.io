@@ -1,0 +1,6 @@
+.train-box {
+  min-width: 80%;
+  min-height: 50px;
+  background-color: aliceblue;
+  border-radius: 10px;
+}

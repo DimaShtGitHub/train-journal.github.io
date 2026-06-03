@@ -1,6 +1,7 @@
 import { useState } from "react"
 import NewTrain from "./pages/NewTrain"
 import Modal from "./components/Modal";
+import AllTrain from "./pages/AllTrain";
 
 const App = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -13,6 +14,8 @@ const App = () => {
     <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}> 
       <NewTrain />
     </Modal>
+
+    <AllTrain />
     
   </>)
 }
