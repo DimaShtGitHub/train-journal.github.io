@@ -4,8 +4,8 @@
   justify-content: center;
   gap: 8px;
 
-  min-height: 44px;          /* удобно для iPhone */
-  padding: 10px 20px;
+  min-height: 33px;          /* удобно для iPhone */
+  padding: 6px 10px;
 
   border: none;
   border-radius: 10px;
