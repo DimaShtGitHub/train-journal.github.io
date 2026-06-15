@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import './AllTrain.css'
 import Modal from '../components/Modal';
 import NewTrain from './NewTrain';
+import Button from '../components/ui/Button/Button';
 
 const AllTrain = () => {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -44,11 +45,11 @@ const AllTrain = () => {
                     <td>{index + 1}</td>
                     <td>{el.place}</td>
                     <td>{el.date}</td>
-                    <button onClick={() => deleteTrain(el.id)}>удалить</button>
-                    <button onClick={() => {
+                    <Button variant='danger' onClick={() => deleteTrain(el.id)}>удалить</Button>
+                    <Button variant='secondary' onClick={() => {
                       setModalOpen(true)
                       openTrain(el)
-                      }}>открыть</button>
+                      }}>открыть</Button>
                   </tr>
                 </>
               )

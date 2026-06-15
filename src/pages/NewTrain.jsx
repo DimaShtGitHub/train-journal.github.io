@@ -1,5 +1,6 @@
 import { useState } from "react";
 import './NewTrain.css'
+import Button from "../components/ui/Button/Button";
 
 const NewTrain = ({data, onClose}) => {
   const [list, setList] = useState([])
@@ -72,7 +73,7 @@ const NewTrain = ({data, onClose}) => {
             <input type="number" name="lap" placeholder="Количество кругов:"></input>
             <input type="text" name="weight" placeholder="Дополнительный вес:"></input>
 
-            <button type="submit">+</button>
+            <Button variant="secondary" type="submit">+</Button>
           </form>
         </div>)
       }
@@ -85,11 +86,13 @@ const NewTrain = ({data, onClose}) => {
 
         <table>
           <thead>
-            <th>№</th>
-            <th>Упражнение</th>
-            <th>Кол</th>
-            <th>Круг</th>
-            <th>Доп вес</th>
+            <tr>
+              <th>№</th>
+              <th>Упражнение</th>
+              <th>Кол</th>
+              <th>Круг</th>
+              <th>Доп вес</th>
+            </tr>
           </thead>
 
           <tbody>
@@ -142,7 +145,7 @@ const NewTrain = ({data, onClose}) => {
           </tbody> 
         </table>
 
-        <button onClick={setTrain}>Сохранить</button>
+        <Button variant="primary" onClick={setTrain}>Сохранить</Button>
       </div>
     )}
   </div>
