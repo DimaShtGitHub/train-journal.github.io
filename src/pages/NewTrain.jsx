@@ -1,10 +1,11 @@
 import { useState } from "react";
 import './NewTrain.css'
 
-const NewTrain = () => {
+const NewTrain = ({data, onClose}) => {
   const [list, setList] = useState([])
   const [place, setPlace] = useState('')
   
+  console.log('Что пришло в тренировку:', data);
   
   const today = new Date();
   const day = today.getDate();
@@ -28,6 +29,7 @@ const NewTrain = () => {
     }])
 
     event.target.reset();
+    document.getElementById("first").focus()
   }
 
   const setTrain = () => {
@@ -42,6 +44,7 @@ const NewTrain = () => {
       }]
       
       localStorage.setItem('workouts', JSON.stringify(result))
+      onClose()
     } else {
       
       const infoTrain = {
@@ -53,42 +56,33 @@ const NewTrain = () => {
   
       preLs.push(infoTrain)
       localStorage.setItem('workouts', JSON.stringify(preLs))
+      onClose()
     }
 
   }
   
   return <div className="train_box">
-    <div className="train_panel">
-      <form onSubmit={handleSubmit}>
-        <p>
-          <input type="text" name="gym" placeholder="Упражнение:"></input>
-        </p>
+    {/* Если данные о тренировке есть, тогда мы не показываем "поле ввода упражнения" */}
+    {Object.keys(data).length ? 
+      (<></>) : (
+        <div className="train_panel">
+          <form onSubmit={handleSubmit} className="train_inputs">
+            <input id="first" type="text" name="gym" placeholder="Упражнение:"></input>
+            <input type="text" name="num" placeholder="Количество повторений:"></input>
+            <input type="number" name="lap" placeholder="Количество кругов:"></input>
+            <input type="text" name="weight" placeholder="Дополнительный вес:"></input>
 
-        <p>
-          <input type="text" name="num" placeholder="Количество повторений:"></input>
-        </p>        
-        
-        <p>
-          <input type="number" name="lap" placeholder="Количество кругов:"></input>
-        </p>
+            <button type="submit">+</button>
+          </form>
+        </div>)
+      }
 
-        <p>
-          <input type="text" name="weight" placeholder="Дополнительный вес:"></input>
-        </p>
-        <button type="submit">+</button>
-      </form>
-    </div>
+    {/* Если данные о тренировке есть, то мы отображаем заполненную тренировку, иначе форму для заполнения */}
+    {Object.keys(data).length ? (
+      <div className="train_list">
 
+        <h2>{data.date}: тренировка {data.place}</h2>
 
-    <div className="train_list">
-      <select name="place" id="place-select" onChange={(e) => console.log(e.target) || setPlace(e.target.value)}>
-        <option value={''}>Выбери место тренировки</option>
-        <option value={'house'}>Дома</option>
-        <option value={'gym'}>В спорт зале</option>
-        <option value={'street'}>На улице</option>
-      </select>
-      <h2>{date}: тренировка {place}</h2>
-    
         <table>
           <thead>
             <th>№</th>
@@ -97,6 +91,42 @@ const NewTrain = () => {
             <th>Круг</th>
             <th>Доп вес</th>
           </thead>
+
+          <tbody>
+            {data.exercises.map((el, index) => {
+              return (
+                <tr key={index}>
+                  <td>{index + 1}</td>
+                  <td>{el.gym}</td>
+                  <td>{el.number}</td>
+                  <td>{el.lap}</td>
+                  <td>{el.weight}</td>
+                </tr>
+              )})
+            }
+          </tbody> 
+        </table>
+      </div>
+      ) : (
+      <div className="train_list">
+        <select name="place" id="place-select" onChange={(e) => console.log(e.target) || setPlace(e.target.value)}>
+          <option value={''}>Выбери место тренировки</option>
+          <option value={'house'}>Дома</option>
+          <option value={'gym'}>В спорт зале</option>
+          <option value={'street'}>На улице</option>
+        </select>
+
+        <h2>{date}: тренировка {place}</h2>
+      
+        <table>
+          <thead>
+            <th>№</th>
+            <th>Упражнение</th>
+            <th>Кол</th>
+            <th>Круг</th>
+            <th>Доп вес</th>
+          </thead>
+
           <tbody>
             {list.map((el, index) => {
               return (
@@ -109,11 +139,12 @@ const NewTrain = () => {
                 </tr>
               )})
             }
-      </tbody> 
-      </table>
+          </tbody> 
+        </table>
 
-      <button onClick={setTrain}>Сохранить</button>
-    </div>
+        <button onClick={setTrain}>Сохранить</button>
+      </div>
+    )}
   </div>
 }
 

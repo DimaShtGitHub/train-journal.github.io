@@ -1,31 +1,64 @@
+import { useEffect, useState } from 'react'
 import './AllTrain.css'
+import Modal from '../components/Modal';
+import NewTrain from './NewTrain';
 
 const AllTrain = () => {
-  const workouts = JSON.parse(localStorage.getItem('workouts'))
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [dataTrain, setDataTrain] = useState({})
+  const [workouts, setWorkouts] = useState(() => {
+    const data = JSON.parse(localStorage.getItem('workouts'));
+    return Array.isArray(data) ? data : [];
+  });
 
-  console.log(workouts);
+  useEffect(() => {}, [workouts])
+  const deleteTrain = (id) => {
+    const filterTrains = workouts.filter((el) => el.id !== id);
+    
+    setWorkouts(filterTrains)
+    localStorage.setItem('workouts', JSON.stringify(filterTrains))
+  };
+
+  const openTrain = (data) => {
+    setDataTrain(data)
+    setModalOpen(true)
+  }
+
   
   return <div>
     <h2>Все тренировки</h2>
     <div className='train-box'>
       <table>
         <thead>
-          <th>№</th>
-          <th>Место</th>
-          <th>Дата</th>
+          <tr>
+            <th>№</th>
+            <th>Место</th>
+            <th>Дата</th>
+          </tr>
         </thead>
         <tbody>
             {workouts?.map((el, index) => {
-              return (
-                <tr key={index}>
-                  <td>{el.id}</td>
-                  <td>{el.place}</td>
-                  <td>{el.date}</td>
-                </tr>
+              return (<>
+
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{el.place}</td>
+                    <td>{el.date}</td>
+                    <button onClick={() => deleteTrain(el.id)}>удалить</button>
+                    <button onClick={() => {
+                      setModalOpen(true)
+                      openTrain(el)
+                      }}>открыть</button>
+                  </tr>
+                </>
               )
             })}
         </tbody>
       </table> 
+
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        <NewTrain data={dataTrain} />
+      </Modal>
     </div>
   </div>
 }
